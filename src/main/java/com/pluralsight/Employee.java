@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import java.time.LocalDateTime;
+
 public class Employee {
     private String employeeId;
     private String name;
@@ -39,14 +41,36 @@ public class Employee {
         return (hoursWorked > 40) ? hoursWorked - 40 : 0;
     }
 
-//    public void punchIn(int time) {
-//        punchTime = time;
-//    }
-//
-//    public void punchOut(int time) {
-//        // subtract start time from end time and ensure it's not negative
-//        hoursWorked += Math.abs(time - punchTime);
-//    }
+    public void punchIn(int time) {
+        punchTime = time;
+    }
+
+    // overload punchIn method
+    public void punchIn() {
+        punchIn(getHoursFromTime());
+    }
+
+    public void punchOut(int time) {
+        // subtract start time from end time and ensure it's not negative
+        hoursWorked += Math.abs(time - punchTime);
+    }
+
+    // overload punchOut method
+    public void punchOut() {
+        punchOut(getHoursFromTime());
+    }
+
+    // calculate the hour now
+    public int getHoursFromTime() {
+        // get the time now
+        LocalDateTime timeNow = LocalDateTime.now();
+        int hourNow = timeNow.getHour();
+
+        // add one to hourNow if minute is greater than 0
+        hourNow += (timeNow.getMinute() > 0) ? 1 : 0;
+
+        return hourNow;
+    }
 
     public void punchTimeCard(int time) {
         // keep the time within 24 hr limit
