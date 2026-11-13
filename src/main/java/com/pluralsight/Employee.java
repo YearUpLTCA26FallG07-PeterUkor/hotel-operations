@@ -9,8 +9,15 @@ public class Employee {
         this.hoursWorked = hoursWorked;
     }
 
-    public double getPayRate() {
-        return payRate;
+    public double getTotalPay() {
+        // calculate total regular hours pay
+        double totalPay = payRate * getRegularHours();
+
+        // calculate overtime pay rate and total overtime pay
+        double overtimePayRate = (payRate / 100) * 50;
+        totalPay += overtimePayRate * getOvertimeHours();
+
+        return totalPay;
     }
 
     public int getRegularHours() {
