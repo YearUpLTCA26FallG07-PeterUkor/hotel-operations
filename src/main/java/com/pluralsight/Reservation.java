@@ -11,6 +11,12 @@ public class Reservation {
         this.numberOfNights = numberOfNights;
         this.weekend = weekend;
 
+        // calculate price from room type and weekend
+        setPrice();
+    }
+
+    // calculate price
+    public void setPrice() {
         // set price
         if (roomType.equalsIgnoreCase("king")) {
             price = 139;
@@ -30,8 +36,10 @@ public class Reservation {
         return roomType;
     }
 
+    // recalculate price after changing weekend
     public void setRoomType(String roomType) {
         this.roomType = roomType;
+        setPrice();
     }
 
     public double getPrice() {
@@ -50,8 +58,10 @@ public class Reservation {
         return weekend;
     }
 
+    // recalculate price after changing weekend
     public void setWeekend(boolean weekend) {
         this.weekend = weekend;
+        setPrice();
     }
 
     public double getReservationTotal() {
