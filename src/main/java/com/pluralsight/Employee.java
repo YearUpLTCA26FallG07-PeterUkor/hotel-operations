@@ -7,6 +7,7 @@ public class Employee {
     private double payRate;
     private int hoursWorked;
     private int punchTime;
+    private boolean clockedIn;
 
     public Employee(String employeeId, String name, String department, double payRate, int hoursWorked) {
         this.employeeId = employeeId;
@@ -14,6 +15,7 @@ public class Employee {
         this.department = department;
         this.payRate = payRate;
         this.hoursWorked = hoursWorked;
+        clockedIn = false;
     }
 
     public double getTotalPay() {
@@ -37,12 +39,31 @@ public class Employee {
         return (hoursWorked > 40) ? hoursWorked - 40 : 0;
     }
 
-    public void punchIn(int time) {
-        punchTime = time;
-    }
+//    public void punchIn(int time) {
+//        punchTime = time;
+//    }
+//
+//    public void punchOut(int time) {
+//        // subtract start time from end time and ensure it's not negative
+//        hoursWorked += Math.abs(time - punchTime);
+//    }
 
-    public void punchOut(int time) {
-        // subtract start time from end time and ensure it's not negative
-        hoursWorked += Math.abs(time - punchTime);
+    public void punchTimeCard(int time) {
+        // keep the time within 24 hr limit
+        time = Math.abs(time);
+        time %= 24;
+
+        // if employee is clocked-in calculate hours worked and clock out
+        // or else set the punch time and clock in
+        if (clockedIn) {
+
+            hoursWorked += Math.abs(time - punchTime);
+            punchTime = 0;
+            clockedIn = false;
+        } else {
+
+            punchTime = time;
+            clockedIn = true;
+        }
     }
 }
