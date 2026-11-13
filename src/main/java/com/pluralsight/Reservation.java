@@ -20,7 +20,7 @@ public class Reservation {
             throw  new IllegalArgumentException("Invalid room type");
         }
 
-        // increase price by 10% is stay is over a weekend
+        // increase price by 10% if stay is over a weekend
         if (weekend) {
             price += (price / 100) * 10;
         }
