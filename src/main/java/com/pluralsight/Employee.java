@@ -6,6 +6,7 @@ public class Employee {
     private String department;
     private double payRate;
     private int hoursWorked;
+    private int punchTime;
 
     public Employee(String employeeId, String name, String department, double payRate, int hoursWorked) {
         this.employeeId = employeeId;
@@ -34,5 +35,14 @@ public class Employee {
     public int getOvertimeHours() {
         // check if hours are over 40 and return hours over 40
         return (hoursWorked > 40) ? hoursWorked - 40 : 0;
+    }
+
+    public void punchIn(int time) {
+        punchTime = time;
+    }
+
+    public void punchOut(int time) {
+        // subtract start time from end time and ensure it's not negative
+        hoursWorked += Math.abs(time - punchTime);
     }
 }

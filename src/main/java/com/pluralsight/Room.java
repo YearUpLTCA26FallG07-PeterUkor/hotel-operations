@@ -33,6 +33,7 @@ public class Room {
         return !occupied && !dirty;
     }
 
+    // once a guest checks in room is occupied and dirty
     public void checkIn() {
         occupied = false;
         dirty = true;
