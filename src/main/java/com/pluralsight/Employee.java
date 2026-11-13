@@ -14,7 +14,7 @@ public class Employee {
         double totalPay = payRate * getRegularHours();
 
         // calculate overtime pay rate and total overtime pay
-        double overtimePayRate = (payRate / 100) * 50;
+        double overtimePayRate = payRate + (payRate / 100) * 50;
         totalPay += overtimePayRate * getOvertimeHours();
 
         return totalPay;
