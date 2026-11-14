@@ -3,15 +3,15 @@ package com.pluralsight;
 import java.time.LocalDateTime;
 
 public class Employee {
-    private String employeeId;
+    private int employeeId;
     private String name;
     private String department;
     private double payRate;
     private int hoursWorked;
-    private int punchTime;
+    private int punchInTime;
     private boolean clockedIn;
 
-    public Employee(String employeeId, String name, String department, double payRate, int hoursWorked) {
+    public Employee(int employeeId, String name, String department, double payRate, int hoursWorked) {
         this.employeeId = employeeId;
         this.name = name;
         this.department = department;
@@ -42,7 +42,7 @@ public class Employee {
     }
 
     public void punchIn(int time) {
-        punchTime = time;
+        punchInTime = time;
     }
 
     // overload punchIn method
@@ -52,7 +52,7 @@ public class Employee {
 
     public void punchOut(int time) {
         // subtract start time from end time and ensure it's not negative
-        hoursWorked += Math.abs(time - punchTime);
+        hoursWorked += Math.abs(time - punchInTime);
     }
 
     // overload punchOut method
@@ -81,12 +81,12 @@ public class Employee {
         // or else set the punch time and clock in
         if (clockedIn) {
 
-            hoursWorked += Math.abs(time - punchTime);
-            punchTime = 0;
+            hoursWorked += Math.abs(time - punchInTime);
+            punchInTime = 0;
             clockedIn = false;
         } else {
 
-            punchTime = time;
+            punchInTime = time;
             clockedIn = true;
         }
     }
